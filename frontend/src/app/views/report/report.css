@@ -1,0 +1,65 @@
+.conatiner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.reports-container {
+    float: right;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    gap: 20px;
+}
+
+.project-reports {
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.team-performance {
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.deadline-tracking {
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.deadline-tracking::-webkit-scrollbar {
+    display: none;
+}
+
+.team-performance::-webkit-scrollbar {
+    display: none;
+}
+
+.project-reports::-webkit-scrollbar {
+    display: none;
+}

@@ -1,0 +1,375 @@
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --secondary: #64748b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --ai-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --bg-body: #f1f5f9;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --sidebar-width: 260px;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Sidebar --- */
+app-side-bar {
+    float: left;
+}
+
+/* --- Main Content --- */
+.main-content {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 2rem;
+    width: calc(100% - var(--sidebar-width));
+    float: right;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.welcome-text h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.welcome-text p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-ai {
+    background: var(--ai-gradient);
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Stats Cards */
+.stat-card {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.icon-blue {
+    background: #eef2ff;
+    color: var(--primary);
+}
+
+.icon-green {
+    background: #ecfdf5;
+    color: var(--success);
+}
+
+.icon-purple {
+    background: #f5f3ff;
+    color: #a855f7;
+}
+
+.icon-orange {
+    background: #fff7ed;
+    color: var(--warning);
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* AI Promo Section */
+.ai-promo-card {
+    grid-column: span 4;
+    background: var(--ai-gradient);
+    border-radius: 12px;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
+    margin-bottom: 2rem;
+}
+
+.ai-content h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.ai-content p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+    max-width: 600px;
+}
+
+.btn-white {
+    background: white;
+    color: #a855f7;
+    font-weight: 600;
+}
+
+/* Content Sections (Projects & Tasks) */
+.content-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.view-all {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Project List */
+.project-list {
+    list-style: none;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.project-item:last-child {
+    border-bottom: none;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-name {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.project-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 10px;
+}
+
+.project-progress {
+    width: 200px;
+    text-align: right;
+}
+
+.progress-bar-bg {
+    background-color: #e2e8f0;
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Task List */
+.task-list {
+    list-style: none;
+}
+
+.task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.task-checkbox {
+    margin-top: 4px;
+    accent-color: var(--primary);
+    width: 16px;
+    height: 16px;
+}
+
+.task-content {
+    flex: 1;
+}
+
+.task-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: block;
+}
+
+.task-project {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.task-badge {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.badge-high {
+    background: #fee2e2;
+    color: var(--danger);
+}
+
+.badge-medium {
+    background: #ffedd5;
+    color: var(--warning);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-promo-card {
+        grid-column: span 2;
+    }
+
+    .content-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    /* In real app, use hamburger menu */
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-promo-card {
+        grid-column: span 1;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}

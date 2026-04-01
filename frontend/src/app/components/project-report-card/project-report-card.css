@@ -1,0 +1,93 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 350px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    margin: 0 0 15px 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+.projectName {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.ProgressBar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.progress-bar-fill {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.health {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px 10px;
+    color: white;
+}
+
+.mileStone {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.status-Good {
+    background-color: green;
+}
+
+.status-Warning {
+    background-color: yellow;
+}
+
+.status-Bad {
+    background-color: red;
+}

@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.header {
+    display: flex;
+    gap: 1rem;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile-detail {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile-action {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.notification-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.notification-settings div {
+    display: flex;
+    gap: 0.5rem;
+}

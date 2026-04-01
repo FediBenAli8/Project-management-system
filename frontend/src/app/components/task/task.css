@@ -1,0 +1,220 @@
+/* Main List Container */
+.dark-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px;
+    background-color: #f1f5f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    min-width: 400px;
+}
+
+/* Task Item */
+.task-item {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0;
+    color: #64748b;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+/* Main Task Content */
+.task-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px 25px;
+    gap: 15px;
+}
+
+.task-info {
+    flex: 1;
+}
+
+.task-title {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #64748b;
+}
+
+.task-description {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
+
+/* Task Meta (Badges & Date) */
+.task-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-todo {
+    background-color: #ff9800;
+    color: #000;
+}
+
+.status-in-progress {
+    background-color: #ff9800;
+    color: #000;
+}
+
+.status-done {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.priority-low {
+    background-color: #2196f3;
+    color: #fff;
+}
+
+.priority-high {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.due-date {
+    font-size: 0.8rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Expand Button */
+.expand-btn {
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.expand-btn:hover {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #fff;
+}
+
+.expand-icon {
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Sub-Tasks Section */
+.sub-tasks {
+    background-color: #b8b8b8;
+    padding: 15px 25px 15px 40px;
+    border-top: 1px solid #333;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sub-tasks h4 {
+    margin: 0 0 15px 0;
+    font-size: 0.95rem;
+    color: #2c2c2c;
+}
+
+.sub-task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sub-task-item {
+    padding: 8px 0;
+    color: #000;
+}
+
+.sub-task-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #0e0e0e;
+    transition: color 0.2s ease;
+}
+
+.sub-task-label:hover {
+    color: #fff;
+}
+
+.sub-task-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #4caf50;
+}
+
+.sub-task-title {
+    font-size: 0.9rem;
+}
+
+.sub-task-title.completed {
+    text-decoration: line-through;
+    color: #666;
+}
+
+/* Hover Effect for Task Item */
+.task-item:hover .task-main {
+    background-color: #252525;
+}
+
+.task-main {
+    transition: background-color 0.2s ease;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .task-main {
+        flex-direction: column;
+    }
+
+    .expand-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .dark-list {
+        min-width: 100%;
+    }
+}

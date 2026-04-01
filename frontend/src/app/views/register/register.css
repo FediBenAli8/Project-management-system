@@ -1,0 +1,156 @@
+/* Variables for easy theming */
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --error-color: #ef4444;
+    --success-color: #10b981;
+    --text-color: #1f2937;
+    --text-light: #6b7280;
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --border-color: #d1d5db;
+    --input-focus-ring: rgba(79, 70, 229, 0.2);
+}
+
+/* Main Container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    /* Optional: Soft gradient background */
+    background-image: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    padding: 20px;
+}
+
+/* Form Card */
+form {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+}
+
+/* Header */
+form h2 {
+    margin: 0 0 1.5rem;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.025em;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+/* Input Fields */
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+/* Input Focus */
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--input-focus-ring);
+}
+
+/* Input Invalid State */
+.form-control.is-invalid {
+    border-color: var(--error-color);
+    background-color: #fef2f2;
+}
+
+.form-control.is-invalid:focus {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+}
+
+/* Input Valid State (Optional) */
+.form-control.is-valid {
+    border-color: var(--success-color);
+}
+
+/* Error Messages */
+.error-message {
+    display: block;
+    color: var(--error-color);
+    font-size: 0.75rem;
+    margin-top: 0.35rem;
+    font-weight: 500;
+    animation: slideDown 0.2s ease-out;
+}
+
+/* Submit Button */
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+    background-color: var(--text-light);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.875rem;
+    background-color: var(--primary-color);
+    color: rgb(17, 17, 17);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 0.5rem;
+}
+
+/* Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    form {
+        padding: 1.5rem;
+    }
+}

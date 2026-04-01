@@ -1,0 +1,179 @@
+<!-- Main Content Area -->
+<app-side-bar></app-side-bar>
+<main class="main-content">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="welcome-text">
+            <h1>Welcome back, John!</h1>
+            <p>Here's what's happening with your projects today.</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-ai">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                New Project with AI
+            </button>
+            <button class="btn" style="background: white; border: 1px solid var(--border);">
+                <i class="fa-regular fa-bell"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <div class="stat-header">
+                <div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Active Projects</div>
+                </div>
+                <div class="stat-icon icon-blue"><i class="fa-solid fa-folder"></i></div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-header">
+                <div>
+                    <div class="stat-value">84%</div>
+                    <div class="stat-label">Weighted Progress</div>
+                </div>
+                <div class="stat-icon icon-green"><i class="fa-solid fa-chart-line"></i></div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-header">
+                <div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Tasks Overdue</div>
+                </div>
+                <div class="stat-icon icon-orange"><i class="fa-solid fa-clock"></i></div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-header">
+                <div>
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Team Members</div>
+                </div>
+                <div class="stat-icon icon-purple"><i class="fa-solid fa-users"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Promo Section -->
+    <div class="ai-promo-card">
+        <div class="ai-content">
+            <h2><i class="fa-solid fa-robot"></i> AI Project Planner Ready</h2>
+            <p>Describe your goal and let our AI generate the optimal task hierarchy and weight distribution
+                automatically.</p>
+        </div>
+        <button class="btn btn-white">Try Now</button>
+    </div>
+
+    <!-- Content Sections -->
+    <div class="content-section">
+
+        <!-- Recent Projects -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Recent Projects</div>
+                <a href="javascript:void(0)" class="view-all">View All</a>
+            </div>
+            <ul class="project-list">
+                <!-- Project 1 -->
+                <li class="project-item">
+                    <div class="project-info">
+                        <span class="project-name">E-Commerce Platform Revamp</span>
+                        <div class="project-meta">
+                            <span><a routerLink="/project-detail"
+                                    style="cursor: pointer; text-decoration: underline;">more info</a></span>
+
+                            <span><i class="fa-regular fa-calendar"></i> Due Oct 24</span>
+                            <span><i class="fa-solid fa-layer-group"></i> 4 Tasks, 12 Subtasks</span>
+                        </div>
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-text">75% Weighted</div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 75%; background-color: var(--success);"></div>
+                        </div>
+                    </div>
+                </li>
+                <!-- Project 2 -->
+                <li class="project-item">
+                    <div class="project-info">
+                        <span class="project-name">Mobile App API Integration</span>
+                        <div class="project-meta">
+                            <span><i class="fa-regular fa-calendar"></i> Due Nov 01</span>
+                            <span><i class="fa-solid fa-layer-group"></i> 3 Tasks, 8 Subtasks</span>
+                        </div>
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-text">40% Weighted</div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 40%; background-color: var(--warning);"></div>
+                        </div>
+                    </div>
+                </li>
+                <!-- Project 3 -->
+                <li class="project-item">
+                    <div class="project-info">
+                        <span class="project-name">Internal Dashboard UI</span>
+                        <div class="project-meta">
+                            <span><i class="fa-regular fa-calendar"></i> Due Sep 30</span>
+                            <span><i class="fa-solid fa-layer-group"></i> 2 Tasks, 5 Subtasks</span>
+                        </div>
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-text">90% Weighted</div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 90%; background-color: var(--success);"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- My Tasks -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">My Priority Tasks</div>
+                <a href="javascript:void(0)" class="view-all">View All</a>
+            </div>
+            <ul class="task-list">
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <span class="task-title">Review Database Schema</span>
+                        <span class="task-project">E-Commerce Platform</span>
+                    </div>
+                    <span class="task-badge badge-high">High</span>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <span class="task-title">Update API Documentation</span>
+                        <span class="task-project">Mobile App API</span>
+                    </div>
+                    <span class="task-badge badge-medium">Medium</span>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <span class="task-title">Fix Login Bug #402</span>
+                        <span class="task-project">Internal Dashboard</span>
+                    </div>
+                    <span class="task-badge badge-high">High</span>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <div class="task-content">
+                        <span class="task-title">Client Meeting Preparation</span>
+                        <span class="task-project">General</span>
+                    </div>
+                    <span class="task-badge badge-medium">Medium</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</main>

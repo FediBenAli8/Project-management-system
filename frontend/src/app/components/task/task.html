@@ -1,0 +1,51 @@
+@if(data!=null||data!=undefined||data!=[]){
+<h1>Task</h1>
+<ul class="dark-list">
+    @if(data.length!=0)
+    {@for (task of data; track task.id) {
+    <li class="task-item">
+        <!-- Main Task Content -->
+        <div class="task-main">
+            <div class="task-info">
+                <h3 class="task-title">{{ task.title }}</h3>
+                <p class="task-description">{{ task.id }}</p>
+                <div class="task-meta">
+                    <span class="badge status-{{ task.status }}">{{ task.status }}</span>
+                </div>
+            </div>
+
+            <!-- Expand Button -->
+            <button class="expand-btn" (click)="toggleExpand(task.id)" [attr.aria-expanded]="isExpanded(task.id)">
+                <span class="expand-icon">{{ isExpanded(task.id) ? '−' : '+' }}</span>
+                <span class="expand-text">{{ isExpanded(task.id) ? 'Hide' : 'Show' }} Sub-tasks</span>
+            </button>
+        </div>
+
+        <!-- Sub-Tasks (Expandable Section) -->
+        @if ((task.subTasks != null && task.subTasks.length!=0) && task.id==expandedTaskId) {
+        <div class="sub-tasks">
+            <h4>Sub-Tasks ({{ task.subTasks.length }})</h4>
+            <ul class="sub-task-list">
+                @for (subTask of task.subTasks; track subTask.id) {
+                <li class="sub-task-item">
+                    <label class="sub-task-label">
+                        <input type="checkbox" [checked]="subTask.status=='done'"
+                            (change)="toggleSubTask(task.id, subTask.id)" />
+                        <span class="sub-task-title" [class.status-{{subTask.status}}]="subTask.status">
+                            {{ subTask.title }}
+                        </span>
+                    </label>
+                </li>
+                }
+            </ul>
+        </div>
+        }
+    </li>
+    }
+    }
+    @else{
+    <h2>no data</h2>
+    }
+</ul>}
+@else{
+<h1>Loading data</h1>}

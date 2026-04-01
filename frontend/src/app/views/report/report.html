@@ -1,0 +1,25 @@
+<div class="container">
+    <app-side-bar></app-side-bar>
+    <div class="reports-container">
+        <h1>Report</h1>
+        <h2>projects report</h2>
+        <div class="project-reports">
+            @for(report of projectReports; track report.projectName){
+            <app-project-report-card [report]="report"></app-project-report-card>
+            }
+        </div>
+        <h2>team performance reports</h2>
+        <div class="team-performance">
+            @for(performance of teamPerfomance; track performance.taskCompleted){
+            <app-team-performance-card [performance]="performance"></app-team-performance-card>
+            }
+        </div>
+        <h2>deadline tracking reports</h2>
+        <div class="deadline-tracking">
+            @for(deadline of deadlineTracking; track deadline.deadline){
+            <app-deadline-tracking-card [deadline]="deadline"></app-deadline-tracking-card>
+            }
+        </div>
+    </div>
+
+</div>

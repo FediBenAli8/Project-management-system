@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="projectName">{{report.projectName}}</h2>
+        </div>
+        <div class="card-body">
+            <p>Project Report</p>
+            <div class="ProgressBar">
+                <div class="progress-bar-fill" [style.width.%]="report.progress">{{report.progress}}%</div>
+            </div>
+            <p class="health status-{{report.health}}">Health: {{report.health}}</p>
+            <p class="mileStone">next mile Stone: {{report.mileStone}}</p>
+        </div>
+    </div>
+</div>
