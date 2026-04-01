@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-create-project',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './profile.html',
-  styleUrl: './profile.css',
+  templateUrl: './create-project.html',
+  styleUrl: './create-project.css',
 })
-export class Profile {
+export class CreateProject {
 
 }

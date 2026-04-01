@@ -1,0 +1,120 @@
+.page-shell {
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #f5f7fb, #dfe9f3);
+}
+
+.page-card {
+  max-width: 980px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.page-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.page-header h1,
+.project-card h2 {
+  margin: 0;
+  color: #1f2937;
+}
+
+.page-header p,
+.project-card p {
+  color: #6b7280;
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font: inherit;
+  outline: none;
+}
+
+input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.project-card {
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #f9fbff;
+}
+
+.progress-row {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.progress-row span {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: #dbe4f0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #2563eb;
+}
+
+.width-65 {
+  width: 65%;
+}
+
+.width-42 {
+  width: 42%;
+}
+
+.width-88 {
+  width: 88%;
+}
+
+@media (max-width: 640px) {
+  .page-card {
+    padding: 24px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+  }
+}

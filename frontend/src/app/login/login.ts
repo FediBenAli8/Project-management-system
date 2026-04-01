@@ -1,43 +1,43 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './register.html',
-  styleUrl: './register.css',
+  templateUrl: './login.html',
+  styleUrl: './login.css',
 })
-export class Register {
-  userDataForm: FormGroup;
+export class Login {
+  loginForm: FormGroup;
   isSubmitting = false;
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
-    this.userDataForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', Validators.required],
+    this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
   get f() {
-    return this.userDataForm.controls;
+    return this.loginForm.controls;
   }
 
   onSubmit() {
-    this.userDataForm.markAllAsTouched();
-    if (this.userDataForm.invalid) {
+    this.loginForm.markAllAsTouched();
+    if (this.loginForm.invalid) {
       return;
     }
+
     this.isSubmitting = true;
     setTimeout(() => {
-      this.auth.register(this.userDataForm.value.name || 'User');
+      this.auth.login(this.loginForm.value.email);
       this.isSubmitting = false;
       this.router.navigate(['/']);
     }, 500);
   }
 }
+

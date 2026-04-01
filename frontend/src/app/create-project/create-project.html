@@ -1,0 +1,48 @@
+<main class="main-content">
+<section class="page-shell">
+  <div class="page-card">
+    <div class="page-header">
+      <h1>Create Project</h1>
+      <p>Define your project details and prepare the first tasks.</p>
+    </div>
+
+    <div class="section-card">
+      <label for="project-title">Project Title</label>
+      <input id="project-title" type="text" placeholder="Enter project title" />
+
+      <label for="project-description">Description</label>
+      <textarea id="project-description" rows="4" placeholder="Describe your project"></textarea>
+
+      <button type="button">Generate with AI</button>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">
+        <h2>Generated Tasks</h2>
+        <button type="button" class="secondary-btn">Add Task</button>
+      </div>
+
+      <div class="task-item">
+        <div>
+          <h3>Setup Environment</h3>
+          <p>Install dependencies, configure settings, and test the workspace.</p>
+        </div>
+        <span class="status-pill">3 subtasks</span>
+      </div>
+
+      <div class="task-item">
+        <div>
+          <h3>Development</h3>
+          <p>Design architecture and begin implementing the main features.</p>
+        </div>
+        <span class="status-pill">2 subtasks</span>
+      </div>
+    </div>
+
+    <div class="footer-actions">
+      <button type="button" class="secondary-btn">Cancel</button>
+      <button type="button">Save Project</button>
+    </div>
+  </div>
+</section>
+</main>

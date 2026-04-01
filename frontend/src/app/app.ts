@@ -1,16 +1,14 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TaskComponent } from './components/task/task';
-import { Register } from './views/register/register';
-import { Dashboard } from './views/dashboard/dashboard';
-import { Report } from './views/report/report';
+import { SideBar } from './components/side-bar/side-bar';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TaskComponent, Register, Dashboard, Report],
+  imports: [RouterOutlet, SideBar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('app');
+  constructor(public auth: AuthService) {}
 }

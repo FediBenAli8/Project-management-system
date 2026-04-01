@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SideBar } from '../../components/side-bar/side-bar';
 import { ProjectReportCard } from '../../components/project-report-card/project-report-card';
 import { TeamPerformanceCard } from '../../components/team-performance-card/team-performance-card';
 import { DeadlineTrackingCard } from '../../components/deadline-tracking-card/deadline-tracking-card';
@@ -29,7 +28,7 @@ export interface DeadlineTracking {
 
 @Component({
   selector: 'app-report',
-  imports: [SideBar, ProjectReportCard, TeamPerformanceCard, DeadlineTrackingCard],
+  imports: [ProjectReportCard, TeamPerformanceCard, DeadlineTrackingCard],
   standalone: true,
   templateUrl: './report.html',
   styleUrl: './report.css',

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-my-task',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './profile.html',
-  styleUrl: './profile.css',
+  templateUrl: './my-task.html',
+  styleUrl: './my-task.css',
 })
-export class Profile {
+export class MyTask {
 
 }

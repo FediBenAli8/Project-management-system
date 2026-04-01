@@ -1,2 +1,13 @@
-<!-- <router-outlet></router-outlet> -->
-<app-report></app-report>
+<div class="top-nav">
+  <div class="brand">TaskAura</div>
+  <div class="top-actions">
+    <a routerLink="/login" routerLinkActive="active" class="top-btn">Login</a>
+    <a routerLink="/register" routerLinkActive="active" class="top-btn">Register</a>
+  </div>
+</div>
+<div class="app-shell">
+  <app-side-bar></app-side-bar>
+  <main class="content-shell">
+    <router-outlet></router-outlet>
+  </main>
+</div>

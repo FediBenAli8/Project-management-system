@@ -3,27 +3,21 @@
     background-color: var(--bg-card);
     border-right: 1px solid var(--border);
     position: fixed;
-    height: 100%;
+    top: 64px;
+    left: 0;
+    height: calc(100vh - 64px);
     padding: 1rem .5rem;
     display: flex;
     flex-direction: column;
-    z-index: 100;
-    float: left;
+    z-index: 90;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 2.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
 .nav-links {
     list-style: none;
     flex: 1;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-item {
@@ -44,8 +38,9 @@
 
 .nav-link:hover,
 .nav-link.active {
-    background-color: #eef2ff;
-    color: var(--primary);
+    background: linear-gradient(90deg, rgba(99, 102, 241,0.12), rgba(167, 139, 250, 0.08));
+    color: var(--primary-dark);
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
 }
 
 .nav-link i {

@@ -1,40 +1,57 @@
 <aside class="sidebar">
-    <div class="logo">
-        <i class="fa-solid fa-layer-group"></i>
-        <span>ProManage AI</span>
-    </div>
+    
     <ul class="nav-links">
         <li class="nav-item">
-            <a routerLink="/" class="nav-link active">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
                 <i class="fa-solid fa-grid-2"></i> Dashboard
             </a>
         </li>
         <li class="nav-item">
-            <a routerLink="/project-detail" class="nav-link">
-                <i class="fa-solid fa-folder-open"></i> Projects
+            <a routerLink="/project-detail" routerLinkActive="active" class="nav-link">
+                <i class="fa-solid fa-folder-open"></i> Project Detail
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a routerLink="/create-project" routerLinkActive="active" class="nav-link">
+                <i class="fa-solid fa-plus-circle"></i> Create Project
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/project-list" routerLinkActive="active" class="nav-link">
+                <i class="fa-solid fa-list"></i> Project List
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/my-task" routerLinkActive="active" class="nav-link">
                 <i class="fa-solid fa-list-check"></i> My Tasks
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fa-solid fa-chart-pie"></i> Reports
+            <a routerLink="/task-details" routerLinkActive="active" class="nav-link">
+                <i class="fa-solid fa-tasks"></i> Task Details
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fa-solid fa-users"></i> Team
+            <a routerLink="/team-management" routerLinkActive="active" class="nav-link">
+                <i class="fa-solid fa-users"></i> Team Management
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/report" routerLinkActive="active" class="nav-link">
+                <i class="fa-solid fa-chart-bar"></i> Reports
             </a>
         </li>
     </ul>
-    <div class="user-mini">
-        <div class="avatar">JD</div>
-        <div>
-            <div style="font-weight: 600; font-size: 0.9rem;">John Doe</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted);">Team Leader</div>
-        </div>
+    <div *ngIf="auth.isLoggedIn(); else loggedOut" class="user-mini">
+        <a routerLink="/profile" style="text-decoration:none; color:inherit; display:flex; gap:10px; align-items:center;">
+          <div class="avatar">JD</div>
+          <div>
+              <div style="font-weight: 600; font-size: 0.9rem;">{{ auth.userName() || 'User' }}</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Team Member</div>
+          </div>
+        </a>
     </div>
+    <ng-template #loggedOut>
+      <div class="user-mini" style="opacity:0.7;">Sign in to view profile</div>
+    </ng-template>
 </aside>
