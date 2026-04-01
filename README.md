@@ -3,4 +3,5 @@ this is the usercase diagram:
 
 this is the classes diagram: 
 
-<img width="702" height="612" alt="classD_projectMang drawio" src="https://github.com/user-attachments/assets/f52ef346-9bd6-4e35-8a85-3bfce971c913" />
+<img width="702" height="612" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/36a7343a-2725-40f9-9fbb-d81fdff7ec0d" />
+
