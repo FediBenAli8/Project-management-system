@@ -1,25 +1,64 @@
-<main class="main-content">
-<div class="container">
-    <div class="reports-container">
-        <h1>Report</h1>
-        <h2>projects report</h2>
-        <div class="project-reports">
-            @for(report of projectReports; track report.projectName){
-            <app-project-report-card [report]="report"></app-project-report-card>
-            }
+<main class="dashboard-page-container futuristic-report">
+    <div class="animated-bg-layer"></div>
+    
+    <header class="report-header glass-panel modern-3d-hover">
+        <div class="header-titles">
+            <span class="badge ai-badge">Analytics Core</span>
+            <h1 class="gradient-text">Global Report Dashboard</h1>
+            <p class="subtitle">Real-time holistic performance tracking</p>
         </div>
-        <h2>team performance reports</h2>
-        <div class="team-performance">
-            @for(performance of teamPerfomance; track performance.taskCompleted){
-            <app-team-performance-card [performance]="performance"></app-team-performance-card>
-            }
+    </header>
+
+    <div class="report-sections-wrapper">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Projects Overview</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="scroll-wrapper">
+                <div class="project-reports report-row">
+                    @for(report of projectReports; track report.projectName){
+                    <app-project-report-card [report]="report"></app-project-report-card>
+                    }
+                    @empty {
+                        <div class="empty-state glass-panel">No project data available</div>
+                    }
+                </div>
+            </div>
         </div>
-        <h2>deadline tracking reports</h2>
-        <div class="deadline-tracking">
-            @for(deadline of deadlineTracking; track deadline.deadline){
-            <app-deadline-tracking-card [deadline]="deadline"></app-deadline-tracking-card>
-            }
+
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Team Performance Stats</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="scroll-wrapper">
+                <div class="team-performance report-row">
+                    @for(performance of teamPerfomance; track performance.taskCompleted){
+                    <app-team-performance-card [performance]="performance"></app-team-performance-card>
+                    }
+                    @empty {
+                        <div class="empty-state glass-panel">No team performance data available</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Deadline Tracking</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="scroll-wrapper">
+                <div class="deadline-tracking report-row">
+                    @for(deadline of deadlineTracking; track deadline.deadline){
+                    <app-deadline-tracking-card [deadline]="deadline"></app-deadline-tracking-card>
+                    }
+                    @empty {
+                        <div class="empty-state glass-panel">No deadline tracking data available</div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </main>

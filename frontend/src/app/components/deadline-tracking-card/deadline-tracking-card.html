@@ -1,14 +1,25 @@
-<div class="card">
+<div class="card futuristic-card modern-3d-hover">
     <div class="card-header">
-        <h2 class="type"> {{deadline.type}}</h2>
+        <div class="type-badge">{{deadline.type}}</div>
+        <div class="days-left" [class.urgent]="deadline.daysLeft <= 3">
+            <span class="dl-num">{{deadline.daysLeft}}</span>
+            <span class="dl-text">Days Left</span>
+        </div>
     </div>
     <div class="card-body">
-        <div class="date-data">
-            <p class="deadline">deadline: {{deadline.deadline}}</p>
-            <p class="daysLeft">days left: {{deadline.daysLeft}}</p>
-
+        <div class="date-row">
+            <span class="icon">📅</span>
+            <span class="date">{{deadline.deadline}}</span>
         </div>
-        <p class="userName">user name: {{deadline.userName}}</p>
-        <p class="project">project name: {{deadline.project}}</p>
+        <div class="info-group">
+            <div class="info-item">
+                <span class="i-label">Project</span>
+                <span class="i-value">{{deadline.project}}</span>
+            </div>
+            <div class="info-item border-left">
+                <span class="i-label">Assignee</span>
+                <span class="i-value">{{deadline.userName}}</span>
+            </div>
+        </div>
     </div>
 </div>

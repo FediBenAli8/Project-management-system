@@ -32,9 +32,10 @@ export class TaskComponent implements OnInit {
 
   }
   data: Task[] = [];
-  async getSubTasks() {
-    await this.servicetasks.getSubTasks().subscribe({
+  getSubTasks() {
+    this.servicetasks.getSubTasks().subscribe({
       next: (subtasks) => {
+        console.log("subtasks.............." + subtasks);
         subtasks.forEach((st) => {
           //console.log("starts here" + this.data + "this is the console log");
           if (this.data.find((t) => t.id == st.task_id)) {
@@ -46,8 +47,8 @@ export class TaskComponent implements OnInit {
       },
     })
   }
-  async ngOnInit(): Promise<void> {
-    await this.servicetasks.getTasks().subscribe({
+  ngOnInit() {
+    this.servicetasks.getTasks().subscribe({
       next: async (data) => { this.data = data; this.cdr.markForCheck(); },
       error: (err) => { console.log(err) },
       complete: async () => {
@@ -55,7 +56,7 @@ export class TaskComponent implements OnInit {
           console.log(t);
           t.subTasks = [];
         })
-        await this.getSubTasks()
+        this.getSubTasks()
       }
     });
 

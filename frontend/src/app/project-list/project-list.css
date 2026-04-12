@@ -1,16 +1,11 @@
 .page-shell {
   min-height: 100vh;
   padding: 24px;
-  background: linear-gradient(135deg, #f5f7fb, #dfe9f3);
 }
 
 .page-card {
   max-width: 980px;
   margin: 0 auto;
-  background: #ffffff;
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
 .page-header {
@@ -21,12 +16,12 @@
 .page-header h1,
 .project-card h2 {
   margin: 0;
-  color: #1f2937;
+  color: var(--text-main);
 }
 
 .page-header p,
 .project-card p {
-  color: #6b7280;
+  color: var(--text-muted);
 }
 
 .toolbar {
@@ -53,7 +48,7 @@ button {
   padding: 12px 16px;
   border: none;
   border-radius: 10px;
-  background: #2563eb;
+  background: var(--primary);
   color: #ffffff;
   font: inherit;
   font-weight: 600;
@@ -68,9 +63,20 @@ button {
 
 .project-card {
   padding: 20px;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  background: #f9fbff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.project-card:hover {
+  transform: translateY(-8px) rotateX(4deg) rotateY(-2deg) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(67, 97, 238, 0.3);
 }
 
 .progress-row {
@@ -80,7 +86,7 @@ button {
 }
 
 .progress-row span {
-  color: #374151;
+  color: var(--text-main);
   font-size: 14px;
   font-weight: 600;
 }
@@ -94,7 +100,7 @@ button {
 
 .progress-fill {
   height: 100%;
-  background: #2563eb;
+  background: var(--primary);
 }
 
 .width-65 {

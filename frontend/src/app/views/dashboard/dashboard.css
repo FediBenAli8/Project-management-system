@@ -36,11 +36,8 @@ app-side-bar {
 
 /* --- Main Content --- */
 .main-content {
-    margin-left: var(--sidebar-width);
     flex: 1;
-    padding: 2rem;
-    width: calc(100% - var(--sidebar-width));
-    float: right;
+    width: 100%;
 }
 
 /* Header */
@@ -105,12 +102,26 @@ app-side-bar {
 /* Stats Cards */
 .stat-card {
     background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 20px;
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+    -webkit-font-smoothing: antialiased;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px) rotateX(4deg) rotateY(-2deg) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(67, 97, 238, 0.3);
 }
 
 .stat-header {
@@ -165,17 +176,38 @@ app-side-bar {
 .ai-promo-card {
     grid-column: span 4;
     background: var(--ai-gradient);
-    border-radius: 12px;
+    border-radius: 20px;
     padding: 2rem;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 10px 30px -5px rgba(247, 37, 133, 0.4);
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.ai-promo-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+    transform: rotate(30deg);
+    pointer-events: none;
+}
+
+.ai-promo-card:hover {
+    transform: scale(1.01) translateY(-4px);
+    box-shadow: 0 15px 40px -5px rgba(247, 37, 133, 0.6);
 }
 
 .ai-content h2 {
+    color: white;
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
 }
@@ -201,9 +233,18 @@ app-side-bar {
 
 .card {
     background: var(--bg-card);
-    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
     box-shadow: var(--shadow);
     padding: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
 }
 
 .card-header {

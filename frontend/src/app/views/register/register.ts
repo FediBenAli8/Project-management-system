@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -35,7 +35,7 @@ export class Register {
     }
     this.isSubmitting = true;
     setTimeout(() => {
-      this.auth.register(this.userDataForm.value.name || 'User');
+      this.auth.register();//this.userDataForm.value.name || 'User'
       this.isSubmitting = false;
       this.router.navigate(['/']);
     }, 500);

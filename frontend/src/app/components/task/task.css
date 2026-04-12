@@ -117,7 +117,7 @@
 }
 
 .expand-btn:hover {
-    background-color: #3a3a3a;
+    background-color: #dddddd;
     border-color: #555;
     color: #fff;
 }
@@ -130,7 +130,8 @@
 
 /* Sub-Tasks Section */
 .sub-tasks {
-    background-color: #b8b8b8;
+    color: #000;
+    background-color: #f8f8f8;
     padding: 15px 25px 15px 40px;
     border-top: 1px solid #333;
     animation: slideDown 0.3s ease;
@@ -174,9 +175,6 @@
     transition: color 0.2s ease;
 }
 
-.sub-task-label:hover {
-    color: #fff;
-}
 
 .sub-task-label input[type="checkbox"] {
     width: 18px;
@@ -196,7 +194,7 @@
 
 /* Hover Effect for Task Item */
 .task-item:hover .task-main {
-    background-color: #252525;
+    background-color: #fafafa;
 }
 
 .task-main {

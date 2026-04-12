@@ -1,15 +1,15 @@
 /* Variables for easy theming */
 :root {
-    --primary-color: #4f46e5;
-    --primary-hover: #4338ca;
-    --error-color: #ef4444;
-    --success-color: #10b981;
-    --text-color: #1f2937;
-    --text-light: #6b7280;
-    --bg-color: #f3f4f6;
-    --card-bg: #ffffff;
-    --border-color: #d1d5db;
-    --input-focus-ring: rgba(79, 70, 229, 0.2);
+    --primary-color: var(--primary);
+    --primary-hover: var(--primary-dark);
+    --error-color: var(--danger);
+    --success-color: var(--success);
+    --text-color: var(--text-main);
+    --text-light: var(--text-muted);
+    --bg-color: transparent;
+    --card-bg: rgba(255, 255, 255, 0.4);
+    --border-color: var(--border);
+    --input-focus-ring: rgba(67, 97, 238, 0.2);
 }
 
 /* Main Container */
@@ -20,18 +20,19 @@
     align-items: center;
     min-height: 100vh;
     background-color: var(--bg-color);
-    /* Optional: Soft gradient background */
-    background-image: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: inherit;
     padding: 20px;
 }
 
 /* Form Card */
 form {
     background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
     padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
     width: 100%;
     max-width: 420px;
     box-sizing: border-box;
@@ -125,7 +126,7 @@ form h2 {
     width: 100%;
     padding: 0.875rem;
     background-color: var(--primary-color);
-    color: rgb(17, 17, 17);
+    color: #ffffff;
     border: none;
     border-radius: 8px;
     font-size: 1rem;

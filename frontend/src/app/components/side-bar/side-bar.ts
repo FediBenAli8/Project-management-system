@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -10,5 +10,5 @@ import { AuthService } from '../../auth.service';
   styleUrl: './side-bar.css',
 })
 export class SideBar {
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService) { }
 }

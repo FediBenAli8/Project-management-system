@@ -1,27 +1,19 @@
 from fastapi import FastAPI, Depends
 from database import get_session
 from sqlmodel import SQLModel, Session,select
-from models import Tasks,Subtasks
+#from models import Tasks,Subtasks
 from fastapi.middleware.cors import CORSMiddleware
+from routes import auth, users,tasks
 
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "*"  # Angular SSR server (if used)
-    ],
-    allow_credentials=False,
+    allow_origins=["http://localhost:4200","http://127.0.0.1:4200"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get("/project")
-def read_project(session:Session=Depends(get_session)):
-    statement = select(Tasks)
-    result = session.exec(statement).all()
-    return result
-@app.get("/project/subtasks")
-def read_subtasks(session:Session=Depends(get_session)):
-    statement = select(Subtasks)
-    result = session.exec(statement).all()
-    return result
+app.include_router(auth.router)
+app.include_router(users.router)
+app.include_router(tasks.router)

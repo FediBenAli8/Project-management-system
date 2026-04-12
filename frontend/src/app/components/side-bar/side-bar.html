@@ -1,16 +1,12 @@
 <aside class="sidebar">
-    
+
     <ul class="nav-links">
         <li class="nav-item">
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
                 <i class="fa-solid fa-grid-2"></i> Dashboard
             </a>
         </li>
-        <li class="nav-item">
-            <a routerLink="/project-detail" routerLinkActive="active" class="nav-link">
-                <i class="fa-solid fa-folder-open"></i> Project Detail
-            </a>
-        </li>
+
         <li class="nav-item">
             <a routerLink="/create-project" routerLinkActive="active" class="nav-link">
                 <i class="fa-solid fa-plus-circle"></i> Create Project
@@ -26,11 +22,7 @@
                 <i class="fa-solid fa-list-check"></i> My Tasks
             </a>
         </li>
-        <li class="nav-item">
-            <a routerLink="/task-details" routerLinkActive="active" class="nav-link">
-                <i class="fa-solid fa-tasks"></i> Task Details
-            </a>
-        </li>
+
         <li class="nav-item">
             <a routerLink="/team-management" routerLinkActive="active" class="nav-link">
                 <i class="fa-solid fa-users"></i> Team Management
@@ -42,7 +34,7 @@
             </a>
         </li>
     </ul>
-    <div *ngIf="auth.isLoggedIn(); else loggedOut" class="user-mini">
+    <!-- <div *ngIf="auth.isLoggedIn(); else loggedOut" class="user-mini">
         <a routerLink="/profile" style="text-decoration:none; color:inherit; display:flex; gap:10px; align-items:center;">
           <div class="avatar">JD</div>
           <div>
@@ -53,5 +45,5 @@
     </div>
     <ng-template #loggedOut>
       <div class="user-mini" style="opacity:0.7;">Sign in to view profile</div>
-    </ng-template>
+    </ng-template> -->
 </aside>
