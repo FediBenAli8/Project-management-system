@@ -6,19 +6,15 @@ import { AuthService } from '../services/auth.service';
 
 export interface LoginReq {
   email: string;
-  password: string;
-}
-export interface accessToken {
-  email: string;
-  username: string;
-  role: string;
-  id: number;
+  password_hash: string;
 }
 
 
-export interface loginResponse {
-  access_token: accessToken;
+
+export interface Token {
+  access_token: string;
   type: string;
+  user: User
 }
 export interface User {
   id: number;
@@ -46,7 +42,7 @@ export class Login {
   }
   userlog: LoginReq | any = {
     email: "",
-    password: ""
+    password_hash: ""
   }
 
   get f() {
@@ -59,20 +55,31 @@ export class Login {
       return;
     }
     this.userlog.email = this.loginForm.value.email;
-    this.userlog.password = this.loginForm.value.password;
+    this.userlog.password_hash = this.loginForm.value.password;
 
     this.isSubmitting = true;
-    setTimeout(() => {
-      this.auth.login(this.userlog).subscribe({
-        next: () => {
-          this.router.navigate(['/']);
-        },
-        error: (error) => {
-          this.isSubmitting = false;
-          console.error(error);
-        }
-      })
-    }, 500);
+
+    this.auth.login(this.userlog).subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        console.error(error);
+      }
+    })
+
+  }
+  ngOnInit() {
+    this.auth.refresh().subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        console.error(error);
+      }
+    })
   }
 }
 

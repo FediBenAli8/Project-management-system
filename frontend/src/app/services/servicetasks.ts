@@ -7,7 +7,7 @@ import { SubTask } from '../components/task/task';
   providedIn: 'root',
 })
 export class Servicetasks {
-  private apiUrl = "http://localhost:8000/tasks/project";
+  private apiUrl = "http://localhost:8000/project";
   constructor(private http: HttpClient) {
 
   }

@@ -20,6 +20,11 @@ class Subtasks(SQLModel,table=True):
 class UserBase(SQLModel):
     email: str = Field(unique=True, index=True)
     username: str = Field(unique=True, index=True)
+class User(SQLModel):
+    id: int
+    email: str
+    username: str
+    role: str
 
 class Users(UserBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -33,12 +38,12 @@ class UserCreate(UserBase):
 
 class loginReq(SQLModel):
     email:str
-    password:str
+    password_hash:str
 
 class Token(SQLModel):
     access_token: str
-    refresh_token: str
     token_type: str = "bearer"
+    user:User
 
 class UserOut(UserBase):
     id: int
