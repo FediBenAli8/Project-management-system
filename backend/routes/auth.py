@@ -1,7 +1,7 @@
 from sqlmodel import Session, select
 from models import Users,UserCreate,UserOut,Token,UserBase,loginReq,User
 from database import get_session
-from auth import create_access_token, create_refresh_token
+from auth import create_access_token, create_refresh_token, verify_password, get_password_hash
 from fastapi import APIRouter, Depends, HTTPException, Response,Cookie
 from jose import jwt,JWTError
 from auth import SECRET_KEY,ALGORITHM
@@ -17,7 +17,7 @@ def signup(user_data:UserCreate,session:Session=Depends(get_session)):
     user = Users(
         email = user_data.email,
         username = user_data.username,
-        password_hash = user_data.password_hash,
+        password_hash = get_password_hash(user_data.password_hash),
         role = "member"
     )
     session.add(user)
@@ -68,7 +68,7 @@ def login(user_data:loginReq, response: Response, session: Session = Depends(get
     user = session.exec(select(Users).where(Users.email == user_data.email)).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    if user.password_hash != user_data.password_hash:
+    if not verify_password(user_data.password_hash, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid password")
     accessToken = create_access_token({
             "sub": str(user.id),
