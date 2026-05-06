@@ -1,0 +1,105 @@
+
+<main class="main-content">
+
+    
+    <header class="header">
+        <div class="welcome-text">
+            <h1>Welcome back, {{ auth.userName() || 'there' }}!</h1>
+            <p>Here's what's happening with your projects today.</p>
+        </div>
+        <div class="header-actions" *ngIf="auth.isTeamLeader()">
+            <button class="btn btn-ai" routerLink="/create-project">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                New Project with AI
+            </button>
+            
+        </div>
+    </header>
+
+    
+    <div class="dashboard-grid">
+        <div class="stat-card" *ngFor="let stat of stats">
+            <div class="stat-header">
+                <div>
+                    <div class="stat-value">{{ stat.value }}</div>
+                    <div class="stat-label">{{ stat.label }}</div>
+                </div>
+                <div class="stat-icon floating-element" [ngClass]="stat.iconColorClass">
+                    <i class="fa-solid" [ngClass]="stat.iconClass"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="ai-promo-card" *ngIf="auth.isTeamLeader()">
+        <div class="ai-content">
+            <h2><i class="fa-solid fa-robot"></i> AI Project Planner Ready</h2>
+            <p>Describe your goal and let our AI generate the optimal task hierarchy and weight distribution
+                automatically.</p>
+        </div>
+        <button class="btn btn-white" routerLink="/create-project">Try Now</button>
+    </div>
+
+    
+    <div class="content-section">
+        <ng-container *ngIf="isLoading">
+            <p>Loading dashboard data...</p>
+        </ng-container>
+        <ng-container *ngIf="!isLoading">
+            <div *ngIf="error" class="error-message">{{ error }}</div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Projects Assigned To Me</div>
+                    <a routerLink="/project-list" class="view-all">View All</a>
+                </div>
+                <ul class="project-list">
+                    <li class="project-item" *ngFor="let project of recentProjects">
+                        <div class="project-info">
+                            <span class="project-name">{{ project.title }}</span>
+                            <div class="project-meta">
+                                <span><a [routerLink]="['/project-detail', project.id]" style="cursor: pointer; text-decoration: underline;">more info</a></span>
+                                <span><i class="fa-regular fa-calendar"></i> Due {{ project.dueText }}</span>
+                                <span><i class="fa-solid fa-layer-group"></i> {{ project.taskCount }} Tasks, {{ project.subtaskCount }} Subtasks</span>
+                            </div>
+                        </div>
+                        <div class="project-progress">
+                            <div class="progress-text">{{ project.progress }}% Complete</div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" [style.width.%]="project.progress" [style.background-color]="project.progress >= 75 ? 'var(--success)' : project.progress >= 40 ? 'var(--warning)' : 'var(--danger)'"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li *ngIf="recentProjects.length === 0" class="empty-state">
+                        No assigned projects available.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">My Tasks</div>
+                    <a routerLink="/my-task" class="view-all">View All</a>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item" *ngFor="let task of priorityTasks">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-content">
+                            <span class="task-title">{{ task.title }}</span>
+                            <span class="task-project">{{ task.projectName }} - {{ task.status }}</span>
+                        </div>
+                        <span class="task-badge" [ngClass]="{
+                            'badge-high': task.priority === 'High',
+                            'badge-medium': task.priority === 'Medium',
+                            'badge-low': task.priority === 'Low'
+                        }">{{ task.priority }}</span>
+                    </li>
+                    <li *ngIf="priorityTasks.length === 0" class="empty-state">
+                        No pending priority tasks.
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+    </div>
+</main>

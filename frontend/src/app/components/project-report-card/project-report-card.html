@@ -1,0 +1,22 @@
+<div class="card futuristic-card modern-3d-hover">
+    <div class="card-header">
+        <h3 class="projectName">{{report.projectName}}</h3>
+        <span class="badge status-badge status-{{report.health}}">{{report.health}}</span>
+    </div>
+    <div class="card-body">
+        <div class="progress-section">
+            <div class="progress-header">
+                <span>Progress</span>
+                <span class="progress-value">{{report.progress}}%</span>
+            </div>
+            <div class="futuristic-progress-bar">
+                <div class="progress-fill" [style.width.%]="report.progress"></div>
+                <div class="progress-glow"></div>
+            </div>
+        </div>
+        <div class="milestone-box">
+            <span class="milestone-label">Next Milestone</span>
+            <span class="milestone-value">{{report.mileStone}}</span>
+        </div>
+    </div>
+</div>

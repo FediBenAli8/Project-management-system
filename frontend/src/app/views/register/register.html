@@ -1,0 +1,58 @@
+<main class="main-content">
+    <div class="form-container">
+        <h2>Register</h2>
+
+
+        <form [formGroup]="userDataForm" (ngSubmit)="onSubmit()">
+
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" formControlName="username" class="form-control"
+                    [class.is-invalid]="f['username'].invalid && f['username'].touched" />
+
+                <div class="error-message" *ngIf="f['username'].invalid && f['username'].touched">
+                    <small *ngIf="f['username'].errors?.['required']">Username is required.</small>
+                    <small *ngIf="f['username'].errors?.['minlength']">Username must be at least 3 characters.</small>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="email">email</label>
+                <input class="form-control" type="text" id="email" formControlName="email"
+                    [class.is-invalid]="f['email'].invalid && f['email'].touched" />
+                <div class="error-message" *ngIf="f['email'].invalid && f['email'].touched">
+                    <small *ngIf="f['email'].errors?.['required']">email is required.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">password</label>
+                <input class="form-control" type="password" id="password" formControlName="password"
+                    [class.is-invalid]="f['password'].invalid && f['password'].touched" />
+                <div class="error-message" *ngIf="f['password'].invalid && f['password'].touched">
+                    <small *ngIf="f['password'].errors?.['required']">password is required.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" formControlName="role" class="form-control"
+                    [class.is-invalid]="f['role'].invalid && f['role'].touched">
+                    <option value="team_leader">Team Leader</option>
+                    <option value="team_member">Team Member</option>
+                </select>
+                <div class="error-message" *ngIf="f['role'].invalid && f['role'].touched">
+                    <small *ngIf="f['role'].errors?.['required']">Role is required.</small>
+                </div>
+            </div>
+
+
+            <button type="submit" [disabled]="userDataForm.invalid || isSubmitting" class="btn-primary" id="submit-btn">
+                {{ isSubmitting ? 'Creating User...' : 'Create User' }}
+            </button>
+
+        </form>
+    </div>
+</main>

@@ -1,0 +1,31 @@
+.performance-charts {
+    display: grid;
+    grid-template-columns: minmax(360px, 1.25fr) minmax(320px, 0.85fr);
+    gap: 24px;
+    min-width: 760px;
+    width: 100%;
+}
+
+.chart-panel {
+    min-height: 390px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.66);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(12px);
+}
+
+.chart-loading {
+    color: #777;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .performance-charts {
+        grid-template-columns: 1fr;
+        min-width: min(360px, calc(100vw - 4rem));
+    }
+}

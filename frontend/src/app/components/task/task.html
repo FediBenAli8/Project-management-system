@@ -1,0 +1,59 @@
+@if(data!=null||data!=undefined||data!=[]){
+<h1>Task</h1>
+<ul class="dark-list">
+    @if(data.length!=0)
+    {@for (task of data; track task.id) {
+    <li class="task-item">
+        
+        <div class="task-main">
+            <div class="task-info">
+                <div class="task-header-content">
+                    <h3 class="task-title">{{ task.title }}</h3>
+                    <span class="task-status" [ngClass]="'status-badge-' + task.status">
+                        {{ task.status }}
+                    </span>
+                </div>
+                <p class="task-description">{{ task.id }}</p>
+            </div>
+
+            
+            <button class="expand-btn" (click)="toggleExpand(task.id)" [attr.aria-expanded]="isExpanded(task.id)">
+                <span class="expand-icon">{{ isExpanded(task.id) ? '−' : '+' }}</span>
+                <span class="expand-text">{{ isExpanded(task.id) ? 'Hide' : 'Show' }} Sub-tasks</span>
+            </button>
+        </div>
+
+        
+        @if ((task.subTasks != null && task.subTasks.length!=0) && task.id==expandedTaskId) {
+        <div class="sub-tasks">
+            <h4>Sub-Tasks ({{ task.subTasks.length }})</h4>
+            <ul class="sub-task-list">
+                @for (subTask of task.subTasks; track subTask.id) {
+                <li class="sub-task-item">
+                    <div class="sub-task-content">
+                        <div class="sub-task-details">
+                            <span class="sub-task-title" [class.status-done]="subTask.status === 'done'">
+                                {{ subTask.title }}
+                            </span>
+                            <span class="sub-task-member" *ngIf="subTask.member_name || subTask.assigned_to_name">
+                                Member: {{ subTask.member_name || subTask.assigned_to_name }}
+                            </span>
+                        </div>
+                        <span class="sub-task-status" [ngClass]="'status-badge-' + subTask.status">
+                            {{ subTask.status }}
+                        </span>
+                    </div>
+                </li>
+                }
+            </ul>
+        </div>
+        }
+    </li>
+    }
+    }
+    @else{
+    <h2>no data</h2>
+    }
+</ul>}
+@else{
+<h1>Loading data</h1>}

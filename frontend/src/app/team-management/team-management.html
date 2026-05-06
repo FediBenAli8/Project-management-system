@@ -1,0 +1,188 @@
+<main class="main-content">
+<section class="page-shell">
+  <div class="page-card">
+    <div class="page-header">
+      <h1>Team Management</h1>
+      <p>Manage your team members and their access levels.</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <p>Loading team data...</p>
+    </div>
+
+    <!-- Add Project Member Section (Team Leaders Only) --> 
+    <div *ngIf="!isLoading && isTeamLeader()" class="project-member-section">
+      <h3>Add Project Member</h3>
+      <div class="project-member-input-group">
+        <select [(ngModel)]="selectedProjectId" aria-label="Project">
+          <option [ngValue]="null" disabled>Select project</option>
+          <option *ngFor="let project of leaderProjects" [ngValue]="project.id">
+            {{ project.title }}
+          </option>
+        </select>
+        <select [(ngModel)]="selectedMemberId" aria-label="Team member">
+          <option [ngValue]="null" disabled>Select member</option>
+          <option *ngFor="let member of getAvailableProjectMembers(selectedProjectId)" [ngValue]="member.id">
+            {{ member.username }}
+          </option>
+        </select>
+        <button
+          type="button"
+          (click)="addMemberToProject()"
+          [disabled]="!selectedProjectId || !selectedMemberId">
+          Add
+        </button>
+      </div>
+      <div *ngIf="selectedProjectId" class="project-member-list">
+        <span
+          *ngFor="let member of getProjectMemberUsers(selectedProjectId)"
+          class="role-badge role-member">
+          {{ member.username }}
+        </span>
+        <span *ngIf="getProjectMemberUsers(selectedProjectId).length === 0" class="empty-inline">
+          No members selected.
+        </span>
+      </div>
+    </div>
+
+    <!-- Team Leaders Section -->
+    <div *ngIf="!isLoading && teamLeaders.length > 0" class="team-section">
+      <div class="section-header">
+        <h2>Team Leaders</h2>
+        <span class="member-count">{{ teamLeaders.length }}</span>
+      </div>
+      <div class="member-list">
+        <div class="member-card" *ngFor="let leader of teamLeaders">
+          <div class="member-info">
+            <div class="member-avatar">{{ leader.username.charAt(0).toUpperCase() }}</div>
+            <div class="member-details">
+              <h3>{{ leader.username }}</h3>
+              <p>{{ leader.email }}</p>
+              <span class="role-badge role-leader">Team Leader</span>
+            </div>
+          </div>
+          <div class="member-actions">
+            <ng-container *ngIf="isTeamLeader() && currentUser?.id !== leader.id">
+              <select (change)="onRoleChange(leader, $event)" class="role-select">
+                <option value="" disabled selected>Change Role</option>
+                <option value="team_member">Demote to Member</option>
+              </select>
+              <button type="button" class="remove-btn" (click)="removeUser(leader.id, leader.username)">Remove</button>
+            </ng-container>
+            <ng-container *ngIf="currentUser?.id === leader.id">
+              <span class="current-user-badge">You</span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Members Section -->
+    <div *ngIf="!isLoading && teamMembers.length > 0" class="team-section">
+      <div class="section-header">
+        <h2>Team Members</h2>
+        <span class="member-count">{{ teamMembers.length }}</span>
+      </div>
+      <div class="member-list">
+        <div class="member-card" *ngFor="let member of teamMembers">
+          <div class="member-info">
+            <div class="member-avatar">{{ member.username.charAt(0).toUpperCase() }}</div>
+            <div class="member-details">
+              <h3>{{ member.username }}</h3>
+              <p>{{ member.email }}</p>
+              <span class="role-badge role-member">Team Member</span>
+            </div>
+          </div>
+          <div class="member-actions">
+            <ng-container *ngIf="!isTeamLeader()">
+              <span class="role-badge role-member">Member</span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && teamLeaders.length === 0 && teamMembers.length === 0" class="empty-state">
+      <p>No team members yet.</p>
+    </div>
+
+    <!-- Projects Section -->
+    <div *ngIf="!isLoading" class="team-section projects-section">
+      <div class="section-header">
+        <h2>{{ isTeamLeader() ? 'My Projects' : 'Assigned Projects' }}</h2>
+        <span class="member-count">{{ displayedProjects.length }}</span>
+      </div>
+
+      <div *ngIf="displayedProjects.length === 0" class="empty-state compact-empty">
+        <p>No projects found.</p>
+      </div>
+
+      <div class="project-list" *ngIf="displayedProjects.length > 0">
+        <div class="project-panel" *ngFor="let project of displayedProjects">
+          <div class="project-panel-header">
+            <div>
+              <h3>{{ project.title }}</h3>
+              <p>{{ project.description || 'No description' }}</p>
+            </div>
+            <div class="project-meta">
+              <span class="role-badge role-leader">Leader: {{ getProjectLeaderName(project) }}</span>
+              <span *ngIf="project.deadline" class="deadline-badge">
+                Deadline: {{ project.deadline | date:'mediumDate' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="project-data-group">
+            <h4>Project Members</h4>
+            <div class="project-member-list inline-members">
+              <span
+                *ngFor="let member of getProjectMemberUsers(project.id)"
+                class="role-badge role-member">
+                {{ member.username }}
+              </span>
+              <span *ngIf="getProjectMemberUsers(project.id).length === 0" class="empty-inline">
+                No members selected.
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="getProjectTasks(project.id).length === 0" class="empty-state compact-empty">
+            <p>No tasks in this project yet.</p>
+          </div>
+
+          <div class="project-task" *ngFor="let task of getProjectTasks(project.id)">
+            <h4>{{ task.title }}</h4>
+
+            <div *ngIf="getTaskSubtasks(task.id).length === 0" class="subtask-empty">
+              No subtasks in this task.
+            </div>
+
+            <div class="subtask-row" *ngFor="let subtask of getTaskSubtasks(task.id)">
+              <div class="subtask-info">
+                <strong>{{ subtask.title }}</strong>
+                <span>{{ subtask.status }} - assigned to {{ getMemberName(subtask.assigned_to) }}</span>
+              </div>
+              <select
+                *ngIf="isTeamLeader()"
+                [ngModel]="subtask.assigned_to"
+                (change)="onSubtaskAssigneeChange(subtask, $event)"
+                aria-label="Assign subtask to team member">
+                <option *ngFor="let member of getProjectMemberUsers(project.id)" [value]="member.id">
+                  {{ member.username }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>

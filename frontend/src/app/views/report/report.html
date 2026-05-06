@@ -1,0 +1,59 @@
+<main class="dashboard-page-container futuristic-report">
+    <div class="animated-bg-layer"></div>
+
+    <header class="report-header glass-panel modern-3d-hover">
+        <div class="header-titles">
+            <span class="badge ai-badge">Analytics Core</span>
+            <h1 class="gradient-text">Global Report Dashboard</h1>
+            <p class="subtitle">Real-time holistic performance tracking</p>
+        </div>
+    </header>
+
+    <div class="report-sections-wrapper">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Tasks Overview</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="scroll-wrapper">
+                <div class="project-reports report-row">
+                    <app-chat-comp></app-chat-comp>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Team Performance Stats</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="scroll-wrapper">
+                <div class="team-performance report-row">
+                    <app-perf-comp></app-perf-comp>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Deadline Tracking</h2>
+                <div class="decorative-line"></div>
+            </div>
+            <div class="scroll-wrapper">
+                <div class="deadline-tracking report-row">
+                    @if (isDeadlineLoading) {
+                    <div class="empty-state glass-panel">Loading project deadlines...</div>
+                    } @else {
+                    @for(deadline of deadlineTracking; track deadline.projectId){
+                    <app-deadline-tracking-card [deadline]="deadline"></app-deadline-tracking-card>
+                    }
+                    @empty {
+                    <div class="empty-state glass-panel">No project deadlines available</div>
+                    }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

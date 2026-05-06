@@ -1,0 +1,8 @@
+fastapi
+sqlmodel
+pymysql
+python-jose[cryptography]
+bcrypt
+uvicorn
+python-multipart
+cryptography

@@ -1,0 +1,57 @@
+<main class="main-content">
+  <section class="page-shell">
+    <div class="page-card">
+      <div class="page-header">
+        <h1>Project List</h1>
+        <p>Review the active projects and track their progress.</p>
+      </div>
+
+      <div class="toolbar">
+        <input type="text" placeholder="Search projects" [(ngModel)]="searchText" (input)="applyFiltersAndSort()" />
+        
+        <select [(ngModel)]="sortBy" (change)="applyFiltersAndSort()">
+          <option value="title">Sort by Title</option>
+          <option value="created_at">Sort by Date</option>
+          <option value="deadline">Sort by Deadline</option>
+        </select>
+
+        <select [(ngModel)]="sortOrder" (change)="applyFiltersAndSort()">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+
+        <label class="filter-label">
+          <input type="checkbox" [(ngModel)]="filterHasDeadline" (change)="applyFiltersAndSort()" />
+          Has Deadline
+        </label>
+      </div>
+
+      <p *ngIf="isLoading">Loading projects...</p>
+      <p *ngIf="!isLoading && filteredProjects.length === 0">No projects Found.</p>
+
+      <div class="projects-grid" *ngIf="!isLoading">
+
+        <div class="project-card" *ngFor="let project of filteredProjects" (click)="viewProjectDetails(project.id)" style="cursor: pointer;">
+          <h2>{{ project.title }}</h2>
+          <p>{{ project.description }}</p>
+          <div class="project-progress">
+            <div class="progress-header">
+              <span>Progress</span>
+              <strong>{{ getProjectProgress(project.id) }}%</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="getProjectProgress(project.id)"></div>
+            </div>
+          </div>
+          <div class="progress-row">
+            <span>Created: {{ project.created_at | date }}</span>
+            <span *ngIf="project.deadline" style="margin-left: 15px; color: #e74c3c; font-weight: bold;">
+              Deadline: {{ project.deadline | date }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>

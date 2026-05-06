@@ -1,0 +1,65 @@
+<main class="page-container futuristic-project-detail">
+    <div class="animated-bg-layer"></div>
+
+    <p *ngIf="isLoading" style="text-align: center; padding: 20px;">Loading project...</p>
+
+    <p *ngIf="!isLoading && !project" style="text-align: center; padding: 20px; color: red;">Project not found</p>
+
+    <div *ngIf="!isLoading && project">
+    <header class="project-header glass-panel modern-3d-hover">
+        <div class="header-content">
+            <div class="title-section">
+                <span class="badge ai-badge">Project Details</span>
+                <h1 class="gradient-text">{{ project.title }}</h1>
+                <p class="subtitle">{{ project.description }}</p>
+            </div>
+
+            <div class="status-section">
+                <div class="status-card">
+                    <div class="status-icon deadline-icon"><i class="fa-regular fa-calendar"></i></div>
+                    <div class="status-data">
+                        <span class="label">Created</span>
+                        <span class="value">{{ project.created_at | date }}</span>
+                    </div>
+                </div>
+                <div class="status-card" *ngIf="project.deadline">
+                    <div class="status-icon deadline-icon" style="color: #e74c3c;"><i class="fa-regular fa-clock"></i></div>
+                    <div class="status-data">
+                        <span class="label">Deadline</span>
+                        <span class="value" style="color: #e74c3c; font-weight: bold;">{{ project.deadline | date }}</span>
+                    </div>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon progress-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="status-data">
+                        <span class="label">Leader Name</span>
+                        <span class="value in-progress-text">{{ leaderName }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span class="progress-label">Project Progress</span>
+                <span class="progress-percentage">{{ projectProgress }}%</span>
+            </div>
+            <div class="futuristic-progress-bar">
+                <div class="progress-fill floating-element" [style.width.%]="projectProgress"></div>
+                <div class="progress-glow" [style.width.%]="projectProgress"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="task-section">
+        <div class="section-header">
+            <h2>Project Tasks</h2>
+            <div class="decorative-line"></div>
+        </div>
+
+        <div class="task-wrapper glass-panel modern-3d-hover">
+            <app-task [projectId]="project.id"></app-task>
+        </div>
+    </section>
+    </div>
+</main>

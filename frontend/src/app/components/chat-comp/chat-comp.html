@@ -1,0 +1,9 @@
+<div id="chart">
+    @if (chartOptions.chart) {
+        <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!" [plotOptions]="chartOptions.plotOptions!"
+            [legend]="chartOptions.legend!" [fill]="chartOptions.fill!" [grid]="chartOptions.grid!"
+            [xaxis]="chartOptions.xaxis!"></apx-chart>
+    } @else {
+        <p style="color: #aaa; text-align: center; padding: 2rem;">Loading chart data...</p>
+    }
+</div>

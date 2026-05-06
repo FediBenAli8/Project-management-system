@@ -1,0 +1,88 @@
+<main class="reviews-page">
+    <section class="reviews-card">
+        <header class="page-header">
+            <div>
+                <span class="eyebrow">Team Leader</span>
+                <h1>Reviews</h1>
+                <p>Approve or decline submitted subtasks from your projects.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" (click)="loadReviews()" [disabled]="isLoading">
+                Refresh
+            </button>
+        </header>
+
+        <div *ngIf="isLoading" class="empty-state">Loading submissions...</div>
+        <div *ngIf="!isLoading && error" class="error-state">{{ error }}</div>
+
+        <div *ngIf="!isLoading && !error && reviews.length === 0" class="empty-state">
+            No submitted subtasks need review right now.
+        </div>
+
+        <div *ngIf="!isLoading && reviews.length > 0" class="review-list">
+            <article class="review-card" *ngFor="let review of reviews">
+                <div class="review-main">
+                    <div class="title-row">
+                        <h2>{{ review.subtask_title }}</h2>
+                        <span class="status-badge" [ngClass]="badgeClass(review.review_status)">
+                            {{ review.review_status }}
+                        </span>
+                    </div>
+
+                    <div class="meta-row">
+                        <span>Project: {{ review.project_title }}</span>
+                        <span>Task: {{ review.task_title }}</span>
+                        <span>Member: {{ review.member_name }}</span>
+                    </div>
+
+                    <p class="note" *ngIf="review.submission_note">
+                        {{ review.submission_note }}
+                    </p>
+
+                    <p class="leader-comment" *ngIf="review.review_comment">
+                        {{ review.review_comment }}
+                    </p>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn btn-secondary" (click)="download(review)">
+                        Download
+                    </button>
+                    <button type="button" class="btn btn-approve" (click)="openAction(review, 'approve')"
+                        [disabled]="review.review_status === 'APPROVED'">
+                        Approve
+                    </button>
+                    <button type="button" class="btn btn-reject" (click)="openAction(review, 'reject')"
+                        [disabled]="review.review_status === 'REJECTED'">
+                        Decline
+                    </button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <div class="modal-backdrop" *ngIf="selectedReview" (click)="closeModal()">
+        <section class="modal-panel" (click)="$event.stopPropagation()">
+            <header class="modal-header">
+                <div>
+                    <span class="eyebrow">{{ modalAction === 'approve' ? 'Approve' : 'Decline' }}</span>
+                    <h2>{{ selectedReview.subtask_title }}</h2>
+                </div>
+                <button type="button" class="icon-btn" (click)="closeModal()">x</button>
+            </header>
+
+            <label class="comment-field">
+                <span>Comment {{ modalAction === 'reject' ? '(required)' : '(optional)' }}</span>
+                <textarea rows="5" [(ngModel)]="modalComment" placeholder="Write feedback for the member"></textarea>
+            </label>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+                <button type="button" class="btn" [ngClass]="modalAction === 'approve' ? 'btn-approve' : 'btn-reject'"
+                    (click)="submitAction()"
+                    [disabled]="isSubmitting || (modalAction === 'reject' && !modalComment.trim())">
+                    {{ isSubmitting ? 'Saving...' : (modalAction === 'approve' ? 'Approve' : 'Decline') }}
+                </button>
+            </div>
+        </section>
+    </div>
+</main>

@@ -1,0 +1,55 @@
+<main class="main-content">
+  <section class="page-shell">
+    <div class="page-card">
+      <div class="page-header">
+        <h1>My Tasks</h1>
+        <p>Keep an eye on the work assigned to you.</p>
+      </div>
+
+      <div class="filters">
+        <button type="button" class="filter-btn" 
+          [class.active]="activeFilter === 'All'"
+          (click)="filterTasks('All')">All</button>
+
+        <button type="button" class="filter-btn"
+          [class.active]="activeFilter === 'in-progress'"
+          (click)="filterTasks('in-progress')">In Progress</button>
+
+        <button type="button" class="filter-btn"
+          [class.active]="activeFilter === 'pending_review'"
+          (click)="filterTasks('pending_review')">Pending Review</button>
+
+        <button type="button" class="filter-btn"
+          [class.active]="activeFilter === 'done'"
+          (click)="filterTasks('done')">Done</button>
+      </div>
+
+      <p *ngIf="isLoading">Loading tasks...</p>
+
+      <p *ngIf="!isLoading && filteredSubtasks.length === 0">No tasks found.</p>
+
+      <div class="tasks-grid" *ngIf="!isLoading">
+        <div class="task-card" *ngFor="let subtask of filteredSubtasks">
+          <div class="task-header">
+            <h2>{{ subtask.title }}</h2>
+            <div class="task-context">
+              <span>Project: {{ getProjectName(subtask) }}</span>
+              <span>Task: {{ getTaskName(subtask) }}</span>
+            </div>
+            <span class="status-badge" [ngClass]="getBadgeClass(subtask.status)">
+              {{ subtask.status }}
+            </span>
+          </div>
+
+          <button 
+            type="button" 
+            (click)="goToSubmission(subtask.id)"
+            [disabled]="isCompletedOrSubmitted(subtask.status)">
+            {{ subtask.status === 'done' ? 'Completed' : (subtask.status === 'pending_review' ? 'Waiting Review' : 'Submit Work') }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>

@@ -1,0 +1,156 @@
+.page-shell {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.page-card {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.page-header h1,
+.project-card h2 {
+  margin: 0;
+  color: var(--text-main);
+}
+
+.page-header p,
+.project-card p {
+  color: var(--text-muted);
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+input, select {
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font: inherit;
+  outline: none;
+  background: white;
+}
+
+input:focus, select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter-label input {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  cursor: pointer;
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.project-card {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.project-card:hover {
+  transform: translateY(-8px) rotateX(4deg) rotateY(-2deg) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(67, 97, 238, 0.3);
+}
+
+.progress-row {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.project-progress {
+  margin-top: 18px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.progress-row span {
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: #dbe4f0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+}
+
+.width-65 {
+  width: 65%;
+}
+
+.width-42 {
+  width: 42%;
+}
+
+.width-88 {
+  width: 88%;
+}
+
+@media (max-width: 640px) {
+  .page-card {
+    padding: 24px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+  }
+}

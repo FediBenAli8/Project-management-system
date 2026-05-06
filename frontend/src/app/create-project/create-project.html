@@ -1,0 +1,91 @@
+<main class="main-content">
+  <section class="page-shell">
+    <div class="page-card">
+      <div class="page-header">
+        <h1>Create Project</h1>
+        <p>Define your project details and prepare the first tasks.</p>
+      </div>
+
+      <div class="section-card">
+        <label for="project-title">Project Title</label>
+        <input [(ngModel)]="projectTitle" id="project-title" type="text" placeholder="Enter project title" />
+
+        <label for="project-deadline">Deadline</label>
+        <input [(ngModel)]="projectDeadline" id="project-deadline" type="date" [min]="minDate" />
+
+        <label for="project-description">Description</label>
+        <textarea [(ngModel)]="projectDescription" id="project-description" rows="4"
+          placeholder="Describe your project"></textarea>
+
+        <button type="button">Generate tasks with AI</button>
+      </div>
+      <div>
+        <div class="section-card">
+          <div class="section-title">
+            <h2>Add Tasks</h2>
+          </div>
+
+          <div class="section-card">
+            <label for="task-title">Task Title</label>
+            <input [(ngModel)]="taskTitle" id="task-title" type="text" placeholder="Enter task title" />
+            <button type="button" class="primary-btn" (click)="addTask()">Add Task</button>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-title">
+            <h2>Generated Tasks</h2>
+          </div>
+          <p *ngIf="tasks.length === 0">No tasks added yet.</p>
+
+          <div class="task-item" *ngFor="let task of tasks; let i = index">
+            <div class="task-header">
+              <div>
+                <h3>{{ task.title }}</h3>
+              </div>
+              <div class="task-buttons">
+                <button type="button" class="primary-btn" (click)="toggleSubtaskForm(i)">
+                  {{ task.showForm ? 'Hide Subtasks' : 'Add Subtask' }}
+                </button>
+                <button type="button" class="secondary-btn" (click)="removeTask(i)">
+                  Remove Task
+                </button>
+              </div>
+            </div>
+
+            <div class="subtask-form" *ngIf="task.showForm">
+              <input [(ngModel)]="task.newSubtask" id="subtask-name" type="text" placeholder="Enter subtask title" />
+              <select [(ngModel)]="task.newSubtaskAssignee" aria-label="Assign subtask to team member">
+                <option [ngValue]="null" disabled>Assign to team member</option>
+                <option *ngFor="let member of teamMembers" [ngValue]="member.id">
+                  {{ member.username }} - {{ member.email }}
+                </option>
+              </select>
+              <button type="button" class="primary-btn" (click)="addSubtask(i)">
+                Add
+              </button>
+              <p *ngIf="task.subtasks.length === 0">No subtasks added yet.</p>
+              <div class="subtask-item" *ngFor="let subtask of task.subtasks; let j = index">
+                <span>{{ subtask.title }}</span>
+                <select [(ngModel)]="subtask.assignedTo" aria-label="Change assigned team member">
+                  <option [ngValue]="null" disabled>Assign to team member</option>
+                  <option *ngFor="let member of teamMembers" [ngValue]="member.id">
+                    {{ member.username }}
+                  </option>
+                </select>
+                <button type="button" class="secondary-btn" (click)="removeSubtask(i, j)">🗑️</button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-actions">
+        <button type="button" class="secondary-btn" (click)="cancelProject()">Cancel</button>
+        <button type="button" id="submit-button" (click)="saveProject()">Save Project</button>
+      </div>
+    </div>
+  </section>
+</main>

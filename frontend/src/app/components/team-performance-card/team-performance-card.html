@@ -1,0 +1,32 @@
+<div class="card futuristic-card modern-3d-hover">
+    <div class="card-header">
+        <div class="icon-box team-icon">👥</div>
+        <h3>Team Performance</h3>
+    </div>
+    <div class="card-body">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-value text-success">{{performance.taskCompleted}}</span>
+                <span class="stat-label">Completed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value text-warning">{{performance.taskInProgress}}</span>
+                <span class="stat-label">In Progress</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value text-danger">{{performance.taskPending}}</span>
+                <span class="stat-label">Pending</span>
+            </div>
+        </div>
+        <div class="metrics-row">
+            <div class="metric-pill">
+                <span class="m-label">Workload</span>
+                <span class="m-value">{{performance.workload}}</span>
+            </div>
+            <div class="metric-pill">
+                <span class="m-label">Velocity</span>
+                <span class="m-value">{{performance.velocity}}</span>
+            </div>
+        </div>
+    </div>
+</div>

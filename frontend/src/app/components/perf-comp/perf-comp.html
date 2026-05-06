@@ -1,0 +1,35 @@
+<div class="performance-charts">
+    @if (chartOptions.chart) {
+    <section class="chart-panel">
+        <apx-chart
+            [series]="chartOptions.series!"
+            [chart]="chartOptions.chart!"
+            [plotOptions]="chartOptions.plotOptions!"
+            [dataLabels]="chartOptions.dataLabels!"
+            [xaxis]="chartOptions.xaxis!"
+            [yaxis]="chartOptions.yaxis!"
+            [title]="chartOptions.title!"
+            [subtitle]="chartOptions.subtitle!"
+            [fill]="chartOptions.fill!"
+            [legend]="chartOptions.legend!"
+        ></apx-chart>
+    </section>
+    <section class="chart-panel">
+        <apx-chart
+            [series]="taskDoneChartOptions.series!"
+            [chart]="taskDoneChartOptions.chart!"
+            [plotOptions]="taskDoneChartOptions.plotOptions!"
+            [dataLabels]="taskDoneChartOptions.dataLabels!"
+            [labels]="taskDoneChartOptions.labels!"
+            [title]="taskDoneChartOptions.title!"
+            [subtitle]="taskDoneChartOptions.subtitle!"
+            [legend]="taskDoneChartOptions.legend!"
+            [colors]="taskDoneChartOptions.colors!"
+            [tooltip]="taskDoneChartOptions.tooltip!"
+            [responsive]="taskDoneChartOptions.responsive!"
+        ></apx-chart>
+    </section>
+    } @else {
+    <p class="chart-loading">Loading chart data...</p>
+    }
+</div>

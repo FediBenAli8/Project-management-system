@@ -1,0 +1,45 @@
+<main class="submission-shell">
+  <section class="submission-card">
+    <a routerLink="/my-task" class="back-link">Back to My Tasks</a>
+
+    <header class="page-header">
+      <span class="eyebrow">Subtask Submission</span>
+      <h1>Submit Your Work</h1>
+      <p>Upload your deliverable and add a short comment for your team leader.</p>
+    </header>
+
+    <p *ngIf="isLoading">Loading subtask...</p>
+
+    <div *ngIf="!isLoading" class="submission-layout">
+      <aside class="summary-panel">
+        <span class="status-pill">{{ subtask?.status || 'Unknown' }}</span>
+        <h2>{{ subtask?.title || 'Subtask not found' }}</h2>
+        <div class="meta-list">
+          <span>Project: {{ project?.title || 'Unknown project' }}</span>
+          <span>Task: {{ task?.title || 'Unknown task' }}</span>
+        </div>
+      </aside>
+
+      <form class="submission-form" (ngSubmit)="submit()">
+        <label class="field">
+          <span>Deliverable file</span>
+          <input type="file" accept=".pdf,.zip,image/*" (change)="onFileSelected($event)" />
+          <small>Accepted formats: PDF, ZIP, images.</small>
+        </label>
+
+        <label class="field">
+          <span>Comment</span>
+          <textarea rows="6" [(ngModel)]="comment" name="comment"
+            placeholder="Explain what you completed or add notes for review"></textarea>
+        </label>
+
+        <div class="message error" *ngIf="error">{{ error }}</div>
+        <div class="message success" *ngIf="success">{{ success }}</div>
+
+        <button type="submit" [disabled]="isSubmitting || !selectedFile">
+          {{ isSubmitting ? 'Submitting...' : 'Send for Review' }}
+        </button>
+      </form>
+    </div>
+  </section>
+</main>

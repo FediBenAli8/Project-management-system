@@ -1,0 +1,37 @@
+<div class="card futuristic-card modern-3d-hover" [style.--status-color]="deadline.statusColor">
+    <div class="card-header">
+        <div class="type-badge">{{deadline.type}}</div>
+        <div class="days-left" [class.urgent]="deadline.daysLeft <= 3">
+            <span class="dl-num">{{dayCount}}</span>
+            <span class="dl-text">{{dayLabel}}</span>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="date-row">
+            <span class="icon">Date</span>
+            <span class="date">{{deadline.deadline}}</span>
+        </div>
+        <div class="progress-block">
+            <div class="progress-header">
+                <span class="i-label">Progress</span>
+                <span class="progress-status">
+                    <span class="status-dot"></span>
+                    {{deadline.statusLabel}} · {{deadline.progress}}%
+                </span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" [style.width.%]="deadline.progress"></div>
+            </div>
+        </div>
+        <div class="info-group">
+            <div class="info-item">
+                <span class="i-label">Project</span>
+                <span class="i-value">{{deadline.project}}</span>
+            </div>
+            <div class="info-item border-left">
+                <span class="i-label">Status</span>
+                <span class="i-value">{{deadline.userName}}</span>
+            </div>
+        </div>
+    </div>
+</div>
