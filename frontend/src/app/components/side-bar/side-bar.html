@@ -44,10 +44,11 @@
     <div class="user-mini">
         <a routerLink="/profile"
             style="text-decoration:none; color:inherit; display:flex; gap:10px; align-items:center;">
-            <div class="avatar">JD</div>
+            <div class="avatar"><img [src]="url" alt=""></div>
             <div>
                 <div style="font-weight: 600; font-size: 0.9rem;">{{ auth.userName() || 'User' }}</div>
-                <div style="font-size: 0.75rem; color: var(--text-muted);">{{ auth.isTeamLeader() ? 'Team Leader' : 'Team Member' }}</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">{{ auth.isTeamLeader() ? 'Team Leader' :
+                    'Team Member' }}</div>
             </div>
         </a>
     </div>

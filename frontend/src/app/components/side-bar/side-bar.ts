@@ -11,10 +11,12 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './side-bar.css',
 })
 export class SideBar {
+  url: string = "";
   constructor(public auth: AuthService, private router: Router) { }
   ngOnInit() {
     if (!this.auth.isLoggedIn()) {
       this.router.navigate(['/login']);
     }
+    this.url = this.auth.user()?.picture_url || "";
   }
 }

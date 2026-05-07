@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProjectService } from '../services/project';
 import { Router } from '@angular/router';
 import { User, UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
+import { AiService } from '../services/ai.service';
+import { SuggestedStructure } from '../suggested-structure/suggested-structure';
+
 
 interface ProjectSubtask {
   title: string;
@@ -22,12 +25,13 @@ interface ProjectTask {
 @Component({
   selector: 'app-create-project',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SuggestedStructure],
   templateUrl: './create-project.html',
   styleUrl: './create-project.css',
 })
 export class CreateProject implements OnInit {
-
+  isGenerating = false;
+  suggestedStructure: any;
   projectTitle = '';
   projectDescription = '';
   projectDeadline = '';
@@ -35,13 +39,17 @@ export class CreateProject implements OnInit {
   taskTitle = '';
   teamMembers: User[] = [];
   tasks: ProjectTask[] = [];
-
+  showAiModal = false;
+  aiStructure: any = null;
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
     private auth: AuthService,
-    private router: Router
-  ) { 
+    private router: Router,
+    private aiService: AiService,
+    private cdr: ChangeDetectorRef
+
+  ) {
     this.minDate = new Date().toISOString().split('T')[0];
   }
 
@@ -54,6 +62,41 @@ export class CreateProject implements OnInit {
         console.error('Error loading team members:', err);
       }
     });
+  }
+  generateWithAI() {
+    console.log('Starting generation...');
+    this.isGenerating = true; // Button changes to "Generating..."
+
+    this.aiService.generateStructure(this.projectTitle, this.projectDescription).subscribe({
+      next: (res) => {
+        this.aiStructure = res.structure;
+        this.showAiModal = true;
+        this.isGenerating = false; // <--- THIS MUST BE HERE to reset the button
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.isGenerating = false; // Reset on error too
+        console.error(err);
+      }
+    });
+  }
+  onStructureAccepted(structure: any) {
+    if (!structure || !structure.tasks) return;
+
+    // Maps AI 'name' to your DB 'title' and prepares the local UI state
+    const tasksToMap = structure.tasks || [];
+
+    this.tasks = tasksToMap.map((t: any) => ({
+      title: t.name,
+      subtasks: t.subtasks.map((s: any) => ({
+        title: s.name,
+        assignedTo: null
+      })),
+      newSubtask: '',
+      newSubtaskAssignee: null,
+      showForm: false
+    }));
+    this.showAiModal = false;
   }
 
   addTask() {

@@ -22,6 +22,7 @@ export class AuthService {
     readonly role = computed(() => this._user()?.role ?? null);
     readonly email = computed(() => this._user()?.email ?? null);
     readonly userName = computed(() => this._user()?.username ?? null);
+    readonly pictureUrl = computed(() => this._user()?.picture_url ?? null);
     private get isBrowser(): boolean {
         return isPlatformBrowser(this.platformId);
     }
@@ -37,7 +38,7 @@ export class AuthService {
     readonly accessToken = this._accessToken.asReadonly();
     readonly refreshToken = this._refreshToken.asReadonly();
     readonly user = this._user.asReadonly();
-    
+
     getUserRole(): string | null {
         return this._user()?.role ?? null;
     }
@@ -51,7 +52,7 @@ export class AuthService {
         const role = String(this._user()?.role || '').trim().toLowerCase().replace(/\s+/g, '_');
         return ['team_member', 'member'].includes(role);
     }
-    
+
     constructor(private http: HttpClient,
         private router: Router,
         private tokenService: TokenService,
@@ -77,10 +78,8 @@ export class AuthService {
         ).pipe(tap(res => {
             this._accessToken.set(res.access_token);
             this._user.set(res.user);
-            //this.setStorage('refresh_token', res.refresh_token);
             this.setStorage('access_token', res.access_token);
             this.setStorage('user', JSON.stringify(res.user));
-            //this._refreshToken.set(res.refresh_token);
         }))
     }
 
@@ -90,7 +89,6 @@ export class AuthService {
         ).pipe(tap(res => {
             this._accessToken.set(res.access_token);
             this._user.set(res.user);
-            //this._refreshToken.set(res.refresh_token);
         }))
     }
     changePassword(currentPassword: string, newPassword: string) {
@@ -105,8 +103,11 @@ export class AuthService {
         return this.http.post<Token>(this.api + "/refresh", {},
             { withCredentials: true }
         ).pipe(tap(res => {
-            this._accessToken.set(res.access_token);
-            this._user.set(res.user);
+            if (res.access_token) {
+                this._accessToken.set(res.access_token);
+                this._user.set(res.user);
+
+            }
             //this._refreshToken.set(res.refresh_token);
         }
         ))

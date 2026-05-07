@@ -50,10 +50,12 @@ class User(UserBase, table=True):
     role: str = Field(sa_column=Column(String(50)))
     password: str
     created_at: Optional[datetime] = Field(default_factory=datetime.now, sa_column=Column(DateTime))
+    picture_url: Optional[str] = Field(default="https://uploadcare.com/static/img/avatar-empty.3bb316b1.svg", sa_column=Column(String(500)))
 
 class UserCreate(UserBase):
     password: str
     role: str
+    picture_url: str
 
 class loginReq(SQLModel):
     email:str
@@ -67,6 +69,7 @@ class Token(SQLModel):
 class UserOut(UserBase):
     id: int
     role: str
+    picture_url: Optional[str] = None
 
 class Login(SQLModel):
     email: str
@@ -99,3 +102,14 @@ class TeamPerf(SQLModel):
     task_count: int 
     weight_percentage: float 
     status: list[dict[str, str]]
+
+class AIStructureRequest(SQLModel):
+    title: str
+    description: str
+class SubTaskByAi(SQLModel):
+    name: str
+    weight: float
+class TaskByAi(SQLModel):
+    name: str
+    weight: float
+    subtasks: list[SubTaskByAi]

@@ -1,0 +1,11 @@
+<div>
+    <uc-config ctx-name="my-uploader" use-cloud-image-editor="false" source-list="local, camera" camera-modes="photo"
+        pubkey="d7c0267769dc15ad595c">
+    </uc-config>
+
+    <uc-file-uploader-regular ctx-name="my-uploader" class="uc-light">
+    </uc-file-uploader-regular>
+
+    <uc-upload-ctx-provider ctx-name="my-uploader" (change)="handleChangeEvent($event)">
+    </uc-upload-ctx-provider>
+</div>

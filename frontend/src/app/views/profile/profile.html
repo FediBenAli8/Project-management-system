@@ -2,7 +2,7 @@
     <section class="profile-shell">
         <div class="profile-card">
             <div class="profile-hero">
-                <div class="profile-avatar">{{ getInitials() }}</div>
+                <div class="profile-avatar"><img [src]="getPictureUrl()" alt="">{{ getInitials() }}</div>
                 <div class="profile-heading">
                     <span class="role-pill">{{ getRoleLabel() }}</span>
                     <h1>{{ auth.userName() || 'User' }}</h1>
@@ -41,31 +41,16 @@
 
                     <form class="password-form" (ngSubmit)="changePassword()">
                         <label for="oldPassword">Old Password</label>
-                        <input
-                            type="password"
-                            id="oldPassword"
-                            name="oldPassword"
-                            autocomplete="current-password"
-                            [(ngModel)]="currentPassword"
-                            [disabled]="isChangingPassword">
+                        <input type="password" id="oldPassword" name="oldPassword" autocomplete="current-password"
+                            [(ngModel)]="currentPassword" [disabled]="isChangingPassword">
 
                         <label for="newPassword">New Password</label>
-                        <input
-                            type="password"
-                            id="newPassword"
-                            name="newPassword"
-                            autocomplete="new-password"
-                            [(ngModel)]="newPassword"
-                            [disabled]="isChangingPassword">
+                        <input type="password" id="newPassword" name="newPassword" autocomplete="new-password"
+                            [(ngModel)]="newPassword" [disabled]="isChangingPassword">
 
                         <label for="confirmPassword">Confirm Password</label>
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            autocomplete="new-password"
-                            [(ngModel)]="confirmPassword"
-                            [disabled]="isChangingPassword">
+                        <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password"
+                            [(ngModel)]="confirmPassword" [disabled]="isChangingPassword">
 
                         <p class="form-message success-message" *ngIf="passwordMessage">{{ passwordMessage }}</p>
                         <p class="form-message error-message" *ngIf="passwordError">{{ passwordError }}</p>

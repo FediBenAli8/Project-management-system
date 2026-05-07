@@ -4,9 +4,14 @@ from sqlmodel import Session, select
 
 from database import get_session
 
-from models import Project, ProjectMember, ProjectMemberCreate, User
-
+from models import Project, ProjectMember, ProjectMemberCreate, User, TaskByAi, SubTaskByAi, AIStructureRequest
+import traceback
 from auth import get_current_user
+from aiService import generate_project_structure
+import logging
+from aiService import import_tasks_from_json
+
+logger = logging.getLogger(__name__)
 
 
 
@@ -158,3 +163,22 @@ def delete_project(project_id: int, session: Session = Depends(get_session)):
     session.commit()
 
     return {"message": "Project deleted successfully"}
+
+@router.post("/generate-structure")
+async def generate_structure(request: AIStructureRequest, current_user: User = Depends(get_current_user)):
+    try:
+        raw_structure = generate_project_structure(
+            title=request.title,
+            description=request.description
+        )
+        tasks = import_tasks_from_json(raw_structure)
+        
+        return {
+            "success": True,
+            "structure": {
+                "tasks": tasks
+            }
+        }
+    except Exception as e:
+        logger.error(f"AI generation failed: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"AI generation failed: {str(e)}")

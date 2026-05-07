@@ -24,20 +24,22 @@ def signup(user_data: UserCreate, response: Response, session: Session = Depends
         email=user_data.email,
         username=user_data.username,
         password=get_password_hash(user_data.password),
-        role=user_data.role
+        role=user_data.role,
+        picture_url=user_data.picture_url
     )
     session.add(user)
     session.commit()
     session.refresh(user)
-    
+
     accessToken = create_access_token({
         "sub": str(user.id),
         "email": user.email,
         "username": user.username,
-        "role": user.role
+        "role": user.role,
+        "picture_url": user.picture_url
     })
     refreshToken = create_refresh_token(user.id)
-    response.set_cookie(key="refresh_token", value=refreshToken, secure=False, samesite="lax", httponly=True, max_age=3600*24*7)
+    response.set_cookie(key="refresh_token", value=refreshToken, secure=False, samesite="lax", httponly=True, max_age=3600*24*7, path="/")
     
     return Token(
         access_token=accessToken,
@@ -46,7 +48,8 @@ def signup(user_data: UserCreate, response: Response, session: Session = Depends
             id=user.id,
             email=user.email,
             username=user.username,
-            role=user.role
+            role=user.role,
+            picture_url=user.picture_url
         )
     )
 
@@ -64,25 +67,29 @@ def refresh(response: Response,refresh_token: str = Cookie(default=None), sessio
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid refresh token")
 
+    print(f"Refreshing token for user_id: {user_id}")
+
     user = session.exec(select(User).where(User.id == int(user_id))).first()
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
     
     new_refresh_token = create_refresh_token(user.id)
-    response.set_cookie(key="refresh_token", value=new_refresh_token, secure=False, samesite="lax", httponly=True, max_age=3600*24*7)
+    response.set_cookie(key="refresh_token", value=new_refresh_token, secure=False, samesite="lax", httponly=True, max_age=3600*24*7, path="/")
     return Token(
         access_token=create_access_token({
             "sub": str(user.id),
             "email": user.email,
             "username": user.username,
-            "role": user.role
+            "role": user.role,
+            "picture_url": user.picture_url
         }),
         token_type="bearer",
         user=UserOut(
             id=user.id,
             email=user.email,
             username=user.username,
-            role=user.role
+            role=user.role,
+            picture_url=user.picture_url
         )
     )
 """
@@ -102,10 +109,11 @@ def login(user_data: Login, response: Response, session: Session = Depends(get_s
         "sub": str(user.id),
         "email": user.email,
         "username": user.username,
-        "role": user.role
+        "role": user.role,
+        "picture_url": user.picture_url
     })
     refreshToken = create_refresh_token(user.id)
-    response.set_cookie(key="refresh_token", value=refreshToken, secure=False, samesite="lax", httponly=True, max_age=3600*24*7)
+    response.set_cookie(key="refresh_token", value=refreshToken, secure=False, samesite="lax", httponly=True, max_age=3600*24*7, path="/")
     return Token(
         access_token=accessToken,
         token_type="bearer",
@@ -113,7 +121,8 @@ def login(user_data: Login, response: Response, session: Session = Depends(get_s
             id=user.id,
             email=user.email,
             username=user.username,
-            role=user.role
+            role=user.role,
+            picture_url=user.picture_url
         )
     )
 

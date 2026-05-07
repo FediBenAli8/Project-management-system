@@ -12,7 +12,16 @@ import { AuthService } from './services/auth.service';
 })
 export class App {
   constructor(public auth: AuthService) { }
-  
+
+  ngOnInit() {
+    // Attempt to restore session on page refresh
+    if (!this.auth.isLoggedIn()) {
+      this.auth.refresh().subscribe({
+        error: () => console.log('No active session found')
+      });
+    }
+  }
+
   logout() {
     this.auth.logout();
   }

@@ -72,3 +72,4 @@ app.include_router(tasks.router)
 app.include_router(projects.router)
 app.include_router(subtask.router)
 app.include_router(report.router)
+

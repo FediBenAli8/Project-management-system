@@ -17,7 +17,9 @@
         <textarea [(ngModel)]="projectDescription" id="project-description" rows="4"
           placeholder="Describe your project"></textarea>
 
-        <button type="button">Generate tasks with AI</button>
+        <button type="button" (click)="generateWithAI()" [disabled]="isGenerating">
+          {{ isGenerating ? 'Generating...' :'Generate tasks with AI' }}</button>
+
       </div>
       <div>
         <div class="section-card">
@@ -88,4 +90,7 @@
       </div>
     </div>
   </section>
+  <app-suggested-structure [isVisible]="showAiModal" [structure]="aiStructure" (accepted)="onStructureAccepted($event)"
+    (dismissed)="showAiModal = false">
+  </app-suggested-structure>
 </main>

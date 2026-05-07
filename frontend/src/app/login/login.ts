@@ -21,6 +21,7 @@ export interface User {
   email: string;
   username: string;
   role: string;
+  picture_url: string;
 }
 
 @Component({

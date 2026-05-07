@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './profile.css',
 })
 export class Profile {
+  pic_url: string = '';
   currentPassword = '';
   newPassword = '';
   confirmPassword = '';
@@ -33,6 +34,9 @@ export class Profile {
   getRoleLabel(): string {
     const role = String(this.auth.role() || 'User').replace(/_/g, ' ');
     return role.replace(/\b\w/g, letter => letter.toUpperCase());
+  }
+  getPictureUrl() {
+    return this.auth.pictureUrl() || "";
   }
 
   changePassword(): void {

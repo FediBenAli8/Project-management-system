@@ -47,6 +47,11 @@
                     <small *ngIf="f['role'].errors?.['required']">Role is required.</small>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="picture_url">Picture</label>
+                <file-uploader (onUploadComplete)="onImageUploaded($event)"></file-uploader>
+            </div>
+
 
 
             <button type="submit" [disabled]="userDataForm.invalid || isSubmitting" class="btn-primary" id="submit-btn">

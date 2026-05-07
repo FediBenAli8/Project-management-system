@@ -1,0 +1,40 @@
+@if(isVisible){
+<div class="modal-backdrop">
+    <div class="modal">
+
+        <div class="modal-header">
+            <div class="modal-title">
+                <span class="ai-icon">✦</span>
+                <span>AI-suggested structure</span>
+            </div>
+            <button class="close-btn" (click)="onDismiss()">✕</button>
+        </div>
+
+        <div class="modal-body">
+            @for(task of structure?.tasks; track task.name){
+            <div class="task-block">
+                <div class="task-row">
+                    <span class="task-name">{{ task.name }}</span>
+                    <span class="weight-badge">{{ task.weight }}%</span>
+                </div>
+                <div class="subtask-list">
+                    @for(sub of task.subtasks; track sub.name){
+
+                    <div class="subtask-row">
+                        <span class="subtask-name">{{ sub.name }}</span>
+                        <span class="subtask-weight">{{ sub.weight }}%</span>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-dismiss" (click)="onDismiss()">Dismiss</button>
+            <button class="btn-accept" (click)="onAccept()">✓ Accept structure</button>
+        </div>
+
+    </div>
+</div>
+}
