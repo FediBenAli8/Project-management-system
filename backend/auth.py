@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 import base64
 import hashlib
+import os
 
 from jose import JWTError, jwt
 
@@ -19,7 +20,7 @@ from sqlmodel import select
 from models import User
 #from bcrypt import pwd_context
 
-SECRET_KEY = "your-secret-key"                                            
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 REFRESH_TOKEN_EXPIRE_DAYS = 7
